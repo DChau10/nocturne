@@ -46,10 +46,20 @@ public class NocturneRemoteConnectorConfiguration : BaseConnectorConfiguration
     public string Url { get; set; } = string.Empty;
 
     /// <summary>
-    ///     Direct grant bearer token for the remote instance.
+    ///     Direct grant bearer token for the remote instance. Property name matches
+    ///     <see cref="ConnectorPropertyKey.ApiSecret"/> for reflection binder compatibility.
     /// </summary>
     [ConnectorProperty(ConnectorPropertyKey.ApiSecret, Required = true, Secret = true)]
-    public string Token { get; set; } = string.Empty;
+    public string ApiSecret { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     Compatibility alias for service and test callers referencing Token.
+    /// </summary>
+    public string Token
+    {
+        get => ApiSecret;
+        set => ApiSecret = value;
+    }
 
     /// <summary>
     ///     Page size for paginated V4 API requests.
