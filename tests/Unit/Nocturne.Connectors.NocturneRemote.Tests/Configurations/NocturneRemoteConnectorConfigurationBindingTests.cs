@@ -11,19 +11,18 @@ namespace Nocturne.Connectors.NocturneRemote.Tests.Configurations;
 public class NocturneRemoteConnectorConfigurationBindingTests
 {
     [Fact]
-    public void ApplySecretsToConfig_BindsApiSecret_FromPersistedSecretKey()
+    public void ApplySecretsToConfig_BindsAccessToken_FromPersistedSecretKey()
     {
-        const string secretToken = "nocturne_secret_token_12345";
+        const string secretToken = "noc_secret_token_12345";
         var secrets = new Dictionary<string, string>
         {
-            ["apiSecret"] = secretToken,
+            ["accessToken"] = secretToken,
         };
 
         var config = new NocturneRemoteConnectorConfiguration();
         ConnectorConfigurationBinder.ApplySecretsToConfig(secrets, config);
 
-        config.ApiSecret.Should().Be(secretToken);
-        config.Token.Should().Be(secretToken);
+        config.AccessToken.Should().Be(secretToken);
     }
 
     [Fact]
